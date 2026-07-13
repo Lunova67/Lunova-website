@@ -1,189 +1,1066 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunova</title>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
+  <title>Lunova – Produktempfehlungen und Bestseller</title>
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#0f172a;
-color:white;
-}
+  <meta
+    name="description"
+    content="Entdecke ausgewählte Produktempfehlungen, Bestseller und praktische Alltagsprodukte bei Lunova."
+  >
 
-header{
-text-align:center;
-padding:80px 20px;
-}
+  <style>
+    :root {
+      --background: #071426;
+      --surface: #10223a;
+      --surface-light: #172d49;
+      --text: #ffffff;
+      --muted: #b8c5d8;
+      --blue: #2878ff;
+      --blue-dark: #1459c7;
+      --border: rgba(255, 255, 255, 0.10);
+      --success: #31d17c;
+    }
 
-h1{
-font-size:60px;
-margin:0;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-p{
-color:#cbd5e1;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.btn{
-display:inline-block;
-padding:15px 30px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:10px;
-margin-top:20px;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top right, #123b70 0, transparent 35%),
+        linear-gradient(180deg, #06101f 0%, var(--background) 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-max-width:1200px;
-margin:0 auto;
-padding:40px 20px;
-}
+    a {
+      color: inherit;
+    }
 
-.card{
-background:#1e293b;
-padding:20px;
-border-radius:15px;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-}
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.product-image{
-width:100%;
-height:420px;
-object-fit:contain;
-background:white;
-border-radius:10px;
-margin-bottom:15px;
-}
+    /* Navigation */
 
-.card h3{
-margin-top:0;
-}
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(4, 13, 26, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
 
-.card a{
-display:block;
-background:#2563eb;
-color:white;
-text-align:center;
-padding:12px;
-border-radius:8px;
-text-decoration:none;
-margin-top:auto;
-font-weight:bold;
-}
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-footer{
-text-align:center;
-padding:30px;
-color:#94a3b8;
-}
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
 
-</style>
+    .logo-mark {
+      color: var(--blue);
+      margin-right: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 96px 0 76px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: #87b8ff;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero-text {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 19px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 23px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: white;
+    }
+
+    .secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .hero-visual {
+      min-height: 390px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 50% 35%, #1c69c5 0, transparent 28%),
+        linear-gradient(145deg, #102a4a, #081528);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-orbit {
+      width: 240px;
+      height: 240px;
+      border: 2px solid rgba(64, 142, 255, 0.55);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      box-shadow:
+        0 0 70px rgba(40, 120, 255, 0.35),
+        inset 0 0 60px rgba(40, 120, 255, 0.18);
+    }
+
+    .hero-symbol {
+      font-size: 110px;
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.4));
+    }
+
+    .hero-note {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Vorteile */
+
+    .trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 82px;
+    }
+
+    .trust-item {
+      background: #0d1e34;
+      padding: 23px;
+    }
+
+    .trust-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Bereiche */
+
+    .section {
+      padding: 22px 0 82px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 5vw, 45px);
+      margin-bottom: 7px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background:
+        linear-gradient(160deg, var(--surface-light), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.20);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(75, 146, 255, 0.55);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: contain;
+      display: block;
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 17px;
+    }
+
+    .placeholder-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px;
+      margin-bottom: 17px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 68px;
+      background:
+        radial-gradient(circle at 50% 30%, #2d6fc1 0, transparent 31%),
+        linear-gradient(145deg, #16395e, #09182b);
+    }
+
+    .placeholder-image small {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card h3 {
+      font-size: 21px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .product-details {
+      color: #d8e2f0;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      color: #82b1ff;
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .buy-btn {
+      display: block;
+      width: 100%;
+      margin-top: auto;
+      text-align: center;
+      background: var(--blue);
+      color: white;
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .buy-btn:hover {
+      background: var(--blue-dark);
+    }
+
+    .coming-soon {
+      background: #34445b;
+      color: #d8e2f0;
+      cursor: default;
+    }
+
+    /* Kategorien */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .category {
+      padding: 24px 15px;
+      text-align: center;
+      background: #0d1e34;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .category-icon {
+      display: block;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .category strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .category span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Hinweise */
+
+    .disclosure {
+      margin: 10px auto 70px;
+      padding: 20px 22px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      font-size: 14px;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #050e1b;
+      padding: 56px 0 26px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 40px;
+    }
+
+    .footer-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer a {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer a {
+      display: block;
+      text-decoration: none;
+      margin: 7px 0;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      color: #8190a6;
+      font-size: 13px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 950px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .trust-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav-inner {
+        padding: 15px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-visual {
+        min-height: 300px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<h1>LUNOVA</h1>
-<p>Die besten Produkte, Tests und Empfehlungen</p>
-<a href="#" class="btn">Top Angebote</a>
-</header>
+  <nav class="navbar">
+    <div class="container nav-inner">
 
-<section class="products">
+      <a class="logo" href="#">
+        <span class="logo-mark">✦</span>LUNOVA
+      </a>
 
-<!-- Produkt 1 -->
+      <div class="nav-links">
+        <a href="#">Startseite</a>
+        <a href="#produkte">Bestseller</a>
+        <a href="#kategorien">Kategorien</a>
+        <a href="#hinweis">Affiliate-Hinweis</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
 
-<div class="card">
+    </div>
+  </nav>
 
-<img src="venti.png"
-alt="Honeywell TurboForce HT900E"
-class="product-image">
+  <header class="hero">
+    <div class="container hero-grid">
 
-<h3>Honeywell TurboForce HT900E</h3>
+      <div>
+        <span class="eyebrow">Ausgewählte Produktempfehlungen</span>
 
-<p>
-🌬️ Klein, leise und leistungsstark<br>
-✅ 3 Geschwindigkeiten<br>
-✅ Bis 90° neigbar<br>
-✅ Perfekt für Büro & Schlafzimmer<br>
-✅ Nur ca. 27 €
-</p>
+        <h1>
+          Die besten Produkte für deinen <span>Alltag.</span>
+        </h1>
 
-<a href="https://www.amazon.de/Honeywell-HT900E4-Tischventilator-40-W/dp/B003KHJO6G?linkCode=ll2&tag=lunova67-21"
-target="_blank"
-rel="nofollow sponsored">
-Jetzt bei Amazon ansehen
-</a>
+        <p class="hero-text">
+          Entdecke praktische Bestseller aus Haushalt, Mode, Technik,
+          Freizeit und mehr – übersichtlich präsentiert und direkt
+          vergleichbar.
+        </p>
 
-</div>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#produkte">
+            🔥 Aktuelle Bestseller entdecken
+          </a>
 
-<!-- Produkt 2 -->
+          <a class="secondary-btn" href="#kategorien">
+            Kategorien ansehen
+          </a>
+        </div>
+      </div>
 
-<div class="card">
+      <div class="hero-visual">
+        <div class="hero-orbit">
+          <div class="hero-symbol">✦</div>
+        </div>
 
-<img src="Calvin%20Klein%20Boxershorts%203er%20Pack.png"
-     alt="Calvin Klein Boxershorts 3er Pack"
-     class="product-image">
+        <p class="hero-note">
+          Lunova verwendet ein eigenes, neutrales Markendesign ohne
+          fremde Logos oder geschützte Produktbilder im Banner.
+        </p>
+      </div>
 
-<h3>Calvin Klein Boxershorts 3er Pack</h3>
+    </div>
+  </header>
 
-<p>
-👕 Bestseller für Herren<br>
-✅ 95% Baumwolle<br>
-✅ Hoher Tragekomfort<br>
-✅ Perfekte Passform<br>
-✅ Nur ca. 29 €
-</p>
+  <main>
 
-<a href="https://www.amazon.de/Calvin-Klein-Herren-Boxershorts-3er-Pack/dp/B001BEAWZM?linkCode=ll2&tag=lunova67-21"
-target="_blank"
-rel="nofollow sponsored">
-Jetzt bei Amazon ansehen
-</a>
+    <div class="container">
+      <section class="trust-bar">
 
-</div>
+        <div class="trust-item">
+          <strong>✓ Klare Empfehlungen</strong>
+          <span>Übersichtliche Produktinformationen.</span>
+        </div>
 
-<!-- Produkt 3 -->
+        <div class="trust-item">
+          <strong>🏷 Preis-Leistung</strong>
+          <span>Beliebte Produkte verschiedener Kategorien.</span>
+        </div>
 
-<div class="card">
+        <div class="trust-item">
+          <strong>↻ Regelmäßig erweitert</strong>
+          <span>Neue Empfehlungen werden ergänzt.</span>
+        </div>
 
-<img src="bettlaken.png"
-alt="Jacobson Spannbettlaken"
-class="product-image">
+        <div class="trust-item">
+          <strong>🔒 Datenschutz</strong>
+          <span>Keine unnötige Erfassung persönlicher Daten.</span>
+        </div>
 
-<h3>Jacobson Spannbettlaken 100% Baumwolle</h3>
+      </section>
+    </div>
 
-<p>
-🛏️ Bestseller fürs Schlafzimmer<br>
-✅ 100% Baumwolle<br>
-✅ Atmungsaktiv<br>
-✅ Perfekter Sitz<br>
-✅ Viele Größen & Farben<br>
-✅ Nur ca. 18 €
-</p>
+    <section class="section" id="produkte">
+      <div class="container">
 
-<a href="https://www.amazon.de/Jacobson-Spannbettlaken-Spannbetttuch-Baumwolle-180x200-200x200/dp/B01BYTG0WM?linkCode=ll2&tag=lunova67-21"
-target="_blank"
-rel="nofollow sponsored">
-Jetzt bei Amazon ansehen
-</a>
+        <div class="section-heading">
+          <div>
+            <h2>🔥 Aktuelle Bestseller</h2>
+            <p>Unsere derzeit ausgewählten Produktempfehlungen.</p>
+          </div>
+        </div>
 
-</div>
+        <div class="products">
 
-</section>
+          <!-- PRODUKT 1 -->
 
-<footer>
-© 2026 Lunova
-</footer>
+          <article class="card">
+
+            <img
+              src="venti.png"
+              alt="Honeywell TurboForce HT900E Tischventilator"
+              class="product-image"
+            >
+
+            <h3>Honeywell TurboForce HT900E</h3>
+
+            <div class="product-details">
+              🌬 Klein, leise und leistungsstark<br>
+              ✅ Drei Geschwindigkeitsstufen<br>
+              ✅ Bis zu 90 Grad neigbar<br>
+              ✅ Für Büro und Schlafzimmer
+
+              <div class="price">ca. 27 €</div>
+            </div>
+
+            <a
+              class="buy-btn"
+              href="https://www.amazon.de/Honeywell-HT900E4-Tischventilator-40-W/dp/B003KHJO6G?linkCode=ll2&tag=lunova67-21"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              Jetzt bei Amazon ansehen ↗
+            </a>
+
+          </article>
+
+          <!-- PRODUKT 2 -->
+
+          <article class="card">
+
+            <img
+              src="Calvin%20Klein%20Boxershorts%203er%20Pack.png"
+              alt="Calvin Klein Herren Boxershorts im Dreierpack"
+              class="product-image"
+            >
+
+            <h3>Calvin Klein Boxershorts – 3er-Pack</h3>
+
+            <div class="product-details">
+              👕 Dreierpack für Herren<br>
+              ✅ 95 Prozent Baumwolle<br>
+              ✅ Hoher Tragekomfort<br>
+              ✅ Klassische Passform
+
+              <div class="price">ca. 29 €</div>
+            </div>
+
+            <a
+              class="buy-btn"
+              href="https://www.amazon.de/Calvin-Klein-Herren-Boxershorts-3er-Pack/dp/B001BEAWZM?linkCode=ll2&tag=lunova67-21"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              Jetzt bei Amazon ansehen ↗
+            </a>
+
+          </article>
+
+          <!-- PRODUKT 3 -->
+
+          <article class="card">
+
+            <img
+              src="bettlaken.png"
+              alt="Jacobson Spannbettlaken aus Baumwolle"
+              class="product-image"
+            >
+
+            <h3>Jacobson Spannbettlaken aus Baumwolle</h3>
+
+            <div class="product-details">
+              🛏 Für verschiedene Bettgrößen<br>
+              ✅ 100 Prozent Baumwolle<br>
+              ✅ Atmungsaktives Material<br>
+              ✅ Viele Größen und Farben
+
+              <div class="price">ca. 18 €</div>
+            </div>
+
+            <a
+              class="buy-btn"
+              href="https://www.amazon.de/Jacobson-Spannbettlaken-Spannbetttuch-Baumwolle-180x200-200x200/dp/B01BYTG0WM?linkCode=ll2&tag=lunova67-21"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              Jetzt bei Amazon ansehen ↗
+            </a>
+
+          </article>
+
+          <!-- PRODUKT 4 -->
+
+          <article class="card">
+
+            <img
+              src="horisun-bh.png"
+              alt="HORISUN nahtloser Komfort-BH für Damen"
+              class="product-image"
+            >
+
+            <h3>HORISUN Nahtloser Komfort-BH</h3>
+
+            <div class="product-details">
+              👙 Nahtloses Design<br>
+              ✅ Kabellos und ohne Bügel<br>
+              ✅ Weiches Material<br>
+              ✅ Vollständige Abdeckung
+
+              <div class="price">ca. 20 €</div>
+            </div>
+
+            <a
+              class="buy-btn"
+              href="https://www.amazon.de/HORISUN-Nahtloser-vollst%C3%A4ndiger-Abdeckung-Unterst%C3%BCtzung/dp/B0CNPKBNJQ?th=1&psc=1&linkCode=ll2&tag=lunova67-21&linkId=09b23e4ea58edbb678bbe66e2b1fe2a0"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              Jetzt bei Amazon ansehen ↗
+            </a>
+
+          </article>
+
+          <!-- PRODUKT 5 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              🔋
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Powerbank</h3>
+
+            <div class="product-details">
+              ✅ Für Smartphone und Tablet<br>
+              ✅ Praktisch unterwegs<br>
+              ✅ Kompaktes Format<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 6 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              🎧
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Bluetooth-Kopfhörer</h3>
+
+            <div class="product-details">
+              ✅ Kabellose Verbindung<br>
+              ✅ Für Musik und Telefonate<br>
+              ✅ Alltagstauglich<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 7 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              ⌚
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Smartwatch</h3>
+
+            <div class="product-details">
+              ✅ Fitnessfunktionen<br>
+              ✅ Benachrichtigungen<br>
+              ✅ Für Alltag und Sport<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 8 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              ✨
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Beauty-Produkt</h3>
+
+            <div class="product-details">
+              ✅ Für die tägliche Pflege<br>
+              ✅ Einfache Anwendung<br>
+              ✅ Praktisches Design<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 9 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              💪
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Fitnessbänder-Set</h3>
+
+            <div class="product-details">
+              ✅ Für Heimtraining<br>
+              ✅ Platzsparend<br>
+              ✅ Verschiedene Übungen<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 10 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              🦷
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Elektrische Zahnbürste</h3>
+
+            <div class="product-details">
+              ✅ Für die tägliche Zahnpflege<br>
+              ✅ Verschiedene Reinigungsmodi<br>
+              ✅ Wiederaufladbar<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 11 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              🌿
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Luftreiniger</h3>
+
+            <div class="product-details">
+              ✅ Für kleinere Räume<br>
+              ✅ Kompaktes Design<br>
+              ✅ Für Zuhause oder Büro<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 12 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              💻
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Laptopständer</h3>
+
+            <div class="product-details">
+              ✅ Für das Homeoffice<br>
+              ✅ Ergonomische Position<br>
+              ✅ Platzsparendes Design<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+          <!-- PRODUKT 13 – VORBEREITET -->
+
+          <article class="card">
+            <div class="placeholder-image">
+              🍳
+              <small>Produktbild später hochladen</small>
+            </div>
+
+            <h3>Küchenhelfer</h3>
+
+            <div class="product-details">
+              ✅ Praktisch für den Alltag<br>
+              ✅ Einfache Anwendung<br>
+              ✅ Platzsparend<br>
+              ✅ Produkt folgt
+
+              <div class="price">Preis folgt</div>
+            </div>
+
+            <span class="buy-btn coming-soon">
+              Bald verfügbar
+            </span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kategorien">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <h2>Kategorien entdecken</h2>
+            <p>Empfehlungen für unterschiedliche Interessen.</p>
+          </div>
+        </div>
+
+        <div class="categories">
+
+          <div class="category">
+            <span class="category-icon">🏠</span>
+            <strong>Haus & Haushalt</strong>
+            <span>Praktische Produkte für Zuhause</span>
+          </div>
+
+          <div class="category">
+            <span class="category-icon">👕</span>
+            <strong>Mode</strong>
+            <span>Kleidung und Accessoires</span>
+          </div>
+
+          <div class="category">
+            <span class="category-icon">📱</span>
+            <strong>Technik</strong>
+            <span>Elektronik für den Alltag</span>
+          </div>
+
+          <div class="category">
+            <span class="category-icon">💪</span>
+            <strong>Fitness</strong>
+            <span>Produkte für Bewegung und Training</span>
+          </div>
+
+          <div class="category">
+            <span class="category-icon">🎁</span>
+            <strong>Geschenkideen</strong>
+            <span>Ideen für verschiedene Anlässe</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <aside class="disclosure" id="hinweis">
+        <strong>Affiliate-Hinweis:</strong>
+        Einige Links auf dieser Website sind Affiliate-Links.
+        Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+        Für dich entstehen dadurch keine zusätzlichen Kosten.
+        Preise und Verfügbarkeit können sich jederzeit ändern.
+      </aside>
+    </div>
+
+  </main>
+
+  <footer id="kontakt">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-title">LUNOVA</div>
+          <p>
+            Ausgewählte Produktempfehlungen für Alltag, Haushalt,
+            Mode, Technik und Freizeit.
+          </p>
+        </div>
+
+        <div>
+          <strong>Informationen</strong>
+          <a href="#produkte">Bestseller</a>
+          <a href="#kategorien">Kategorien</a>
+          <a href="#hinweis">Affiliate-Hinweis</a>
+        </div>
+
+        <div>
+          <strong>Rechtliches</strong>
+
+          <!-- Diese beiden Links später mit echten Seiten verbinden. -->
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 Lunova – Alle Rechte vorbehalten.
+      </div>
+
+    </div>
+  </footer>
 
 </body>
 </html>
