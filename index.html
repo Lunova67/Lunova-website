@@ -37,21 +37,22 @@ border-radius:10px;
 margin-top:20px;
 }
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
-gap:25px;
-padding:40px;
-max-width:1400px;
-margin:auto;
+.product-image{
+  width:100%;
+  max-width:100%;
+  height:auto;
+  display:block;
+  border-radius:10px;
+  object-fit:contain;
 }
 
 .card{
-background:#1e293b;
-padding:20px;
-border-radius:15px;
+  background:#1e293b;
+  padding:20px;
+  border-radius:15px;
+  overflow:hidden;
+  min-width:0;
 }
-
 .card h3{
 margin-top:0;
 }
