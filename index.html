@@ -6,6 +6,7 @@
 <title>Lunova</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
@@ -37,22 +38,33 @@ border-radius:10px;
 margin-top:20px;
 }
 
-.product-image{
-  width:100%;
-  max-width:100%;
-  height:auto;
-  display:block;
-  border-radius:10px;
-  object-fit:contain;
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+max-width:1200px;
+margin:0 auto;
+padding:40px 20px;
 }
 
 .card{
-  background:#1e293b;
-  padding:20px;
-  border-radius:15px;
-  overflow:hidden;
-  min-width:0;
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
 }
+
+.product-image{
+width:100%;
+height:420px;
+object-fit:contain;
+background:white;
+border-radius:10px;
+margin-bottom:15px;
+}
+
 .card h3{
 margin-top:0;
 }
@@ -62,9 +74,11 @@ display:block;
 background:#2563eb;
 color:white;
 text-align:center;
-padding:10px;
+padding:12px;
 border-radius:8px;
 text-decoration:none;
+margin-top:auto;
+font-weight:bold;
 }
 
 footer{
@@ -72,6 +86,7 @@ text-align:center;
 padding:30px;
 color:#94a3b8;
 }
+
 </style>
 </head>
 
@@ -85,28 +100,40 @@ color:#94a3b8;
 
 <section class="products">
 
+<!-- Produkt 1 -->
+
 <div class="card">
-  <img src="venti.png" alt="Honeywell TurboForce HT900E" style="width:100%;max-width:500px;height:auto;">
 
-  <h3>Honeywell TurboForce HT900E</h3>
+<img src="venti.png"
+alt="Honeywell TurboForce HT900E"
+class="product-image">
 
-  <p>
-    Klein, leise und überraschend leistungsstark.
-    Perfekt für Schlafzimmer, Büro und Wohnzimmer.
-  </p>
+<h3>Honeywell TurboForce HT900E</h3>
 
-  <a href="https://www.amazon.de/Honeywell-HT900E4-Tischventilator-40-W/dp/B003KHJO6G?linkCode=ll2&tag=lunova67-21"
-     target="_blank"
-     rel="nofollow sponsored">
-     Jetzt bei Amazon ansehen
-  </a>
+<p>
+🌬️ Klein, leise und leistungsstark<br>
+✅ 3 Geschwindigkeiten<br>
+✅ Bis 90° neigbar<br>
+✅ Perfekt für Büro & Schlafzimmer<br>
+✅ Nur ca. 27 €
+</p>
+
+<a href="https://www.amazon.de/Honeywell-HT900E4-Tischventilator-40-W/dp/B003KHJO6G?linkCode=ll2&tag=lunova67-21"
+target="_blank"
+rel="nofollow sponsored">
+Jetzt bei Amazon ansehen
+</a>
+
 </div>
+
+<!-- Produkt 2 -->
 
 <div class="card">
 
 <img src="Calvin%20Klein%203%20pack.png"
-     alt="Calvin Klein Boxershorts 3er Pack"
-     style="width:100%;max-width:500px;height:auto;">
+alt="Calvin Klein Boxershorts 3er Pack"
+class="product-image">
+
 <h3>Calvin Klein Boxershorts 3er Pack</h3>
 
 <p>
@@ -125,10 +152,11 @@ Jetzt bei Amazon ansehen
 
 </div>
 
+<!-- Produkt 3 -->
+
 <div class="card">
 
-<img
-src="bettlaken.png"
+<img src="bettlaken.png"
 alt="Jacobson Spannbettlaken"
 class="product-image">
 
@@ -139,12 +167,11 @@ class="product-image">
 ✅ 100% Baumwolle<br>
 ✅ Atmungsaktiv<br>
 ✅ Perfekter Sitz<br>
-✅ Viele Größen und Farben<br>
+✅ Viele Größen & Farben<br>
 ✅ Nur ca. 18 €
 </p>
 
-<a
-href="https://www.amazon.de/Jacobson-Spannbettlaken-Spannbetttuch-Baumwolle-180x200-200x200/dp/B01BYTG0WM?linkCode=ll2&tag=lunova67-21"
+<a href="https://www.amazon.de/Jacobson-Spannbettlaken-Spannbetttuch-Baumwolle-180x200-200x200/dp/B01BYTG0WM?linkCode=ll2&tag=lunova67-21"
 target="_blank"
 rel="nofollow sponsored">
 Jetzt bei Amazon ansehen
