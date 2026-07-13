@@ -38,17 +38,17 @@ margin-top:20px;
 }
 
 .products{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+gap:25px;
 padding:40px;
+max-width:1400px;
+margin:auto;
 }
 
 .card{
 background:#1e293b;
 padding:20px;
-width:280px;
 border-radius:15px;
 }
 
